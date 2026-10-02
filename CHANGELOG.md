@@ -1,5 +1,10 @@
 # Changelog
 
+## [1.0.2] - 2026-10-02
+
+- Document a bounded private-network operator session for initial review/apply, without adding auto-apply to the cron default.
+- Keep immutable historical tags and align the final local image label with the template version.
+
 ## [1.0.1] - 2026-10-02
 
 - Include the reviewed runtime license inventory required by the minimal multi-stage image.
