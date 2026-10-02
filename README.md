@@ -1,6 +1,6 @@
 # SQLMesh transformations
 
-The current template release is `v1.0.1`. This is an **unpublished evaluation starter**, not a highly available warehouse or unattended schema-change system.
+The current template release is `v1.0.3`. This is an **unpublished evaluation starter**, not a highly available warehouse or unattended schema-change system.
 
 Upstream products: [SQLMesh](https://github.com/SQLMesh/sqlmesh) ([documentation](https://sqlmesh.readthedocs.io/en/stable/)) and [PostgreSQL](https://www.postgresql.org/).
 
@@ -66,7 +66,18 @@ This deletes both local databases. Do not use it on data you need to preserve.
 
 ## Railway setup (not yet cloud-verified)
 
-The standalone source is `tech-progress/sqlmesh-transformations`, with real `release-v1` compatibility channel and immutable `v1.0.1` tag, root `/`. Historical `v1.0.0` lacks the required inventory and is not a qualified deployment release; it is not retagged. Fork maintainers must set `TEMPLATE_SOURCE_REPO` to their own actual accessible repository and authorize Railway's GitHub App; public visibility alone is not proof of source authorization. `TEMPLATE_SOURCE_BRANCH` defaults to slash-free `release-v1`; `TEMPLATE_SOURCE_ROOT` defaults to `/`. Monorepo maintainers may explicitly select `/sqlmesh-transformations`. Build watch patterns follow the selected root. Independent native secret expressions generate distinct database passwords; never use deterministic SDK `randomString` for published credentials.
+### Initial private-network operator session
+
+An uninitialized production environment deliberately fails its cron job; initialization is never silently auto-approved. Use this explicit temporary maintenance configuration to obtain an operator process inside Railway's private network:
+
+1. Wait for both private databases to be healthy. Pause scheduling by clearing the runner's cron schedule and temporarily set its Start Command to `sleep 1800` in Railway's service settings. Keep restart `NEVER`, no public domain/proxy and the same `release-v1` source. Deploy that maintenance configuration and wait for a running instance. It expires after 30 minutes; do not leave it as the production start command.
+2. Use `railway ssh --service "SQLMesh Runner" -- python scripts/fixture.py` **only for synthetic evaluation data**. Real installations provide their own `raw.orders` data. Run `railway ssh --service "SQLMesh Runner" -- sqlmesh test`, then `railway ssh --service "SQLMesh Runner" -- python scripts/plan.py review --execution-time 2026-09-30`. Inspect the complete readable SQL, database targets, categories and bounded intervals. Dates shown here are fixture dates, not an instruction to backfill real data to that date.
+3. Only after operator review, run `railway ssh --service "SQLMesh Runner" -- python scripts/plan.py apply --execution-time 2026-09-30 --approve REVIEWED_SHA256`. The command recomputes the plan against those targets and rejects stale or missing approval. Pause other operators and scheduling during review/apply.
+4. Stop the maintenance deployment. Restore Start Command `./start.sh`, cron `0 * * * *`, restart `NEVER` and no healthcheck/public networking; redeploy the same intended source. Observe a real completed exit-zero job and persisted intervals. A cron runner normally has no continuously running instance between completed jobs; the databases remain running.
+
+SSH uses your own registered Railway key and the explicitly selected project/environment. Do not use local `railway run` as proof that private hostnames are reachable from your workstation, borrow another user's key or expose either database publicly to simplify initialization.
+
+The standalone source is `tech-progress/sqlmesh-transformations`, with real `release-v1` compatibility channel and immutable `v1.0.3` tag, root `/`. Historical tags are not moved; `v1.0.0` lacks the required inventory and `v1.0.2` has a documentation-version mismatch, so neither is a qualified deployment release. Fork maintainers must set `TEMPLATE_SOURCE_REPO` to their own actual accessible repository and authorize Railway's GitHub App; public visibility alone is not proof of source authorization. `TEMPLATE_SOURCE_BRANCH` defaults to slash-free `release-v1`; `TEMPLATE_SOURCE_ROOT` defaults to `/`. Monorepo maintainers may explicitly select `/sqlmesh-transformations`. Build watch patterns follow the selected root. Independent native secret expressions generate distinct database passwords; never use deterministic SDK `randomString` for published credentials.
 
 ```bash
 bun install --frozen-lockfile

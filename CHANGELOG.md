@@ -1,5 +1,10 @@
 # Changelog
 
+## [1.0.3] - 2026-10-02
+
+- Complete the private operator-session instructions and consistent release-version documentation.
+- Require standalone static/build-input gates to pass before future source-channel promotion.
+
 ## [1.0.2] - 2026-10-02
 
 - Document a bounded private-network operator session for initial review/apply, without adding auto-apply to the cron default.

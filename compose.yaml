@@ -30,7 +30,7 @@ services:
       retries: 30
   runner:
     build: .
-    image: rt-sqlmesh-cb5c13c4-runner:1.0.2
+    image: rt-sqlmesh-cb5c13c4-runner:1.0.3
     restart: "no"
     environment:
       PYTHONPATH: /app
