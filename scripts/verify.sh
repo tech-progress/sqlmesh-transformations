@@ -5,6 +5,7 @@ cd "${root}"
 required_files=(
   .dockerignore .env.example .gitignore .railway/railway.ts Dockerfile compose.yaml
   config.py pyproject.toml uv.lock package.json bun.lock VERSION CHANGELOG.md
+  THIRD_PARTY_NOTICES.md runtime-license-inventory.json
   README.md MARKETPLACE.md SUPPORT.md UPGRADE.md LICENSE
   marketplace-metadata.json template-defaults.json template-descriptions.json
   template-networking.json template-volumes.json external_models.yaml start.sh

@@ -1,6 +1,6 @@
 # SQLMesh transformations
 
-The current template release is `v1.0.0`. This is an **unpublished evaluation starter**, not a highly available warehouse or unattended schema-change system.
+The current template release is `v1.0.1`. This is an **unpublished evaluation starter**, not a highly available warehouse or unattended schema-change system.
 
 Upstream products: [SQLMesh](https://github.com/SQLMesh/sqlmesh) ([documentation](https://sqlmesh.readthedocs.io/en/stable/)) and [PostgreSQL](https://www.postgresql.org/).
 
@@ -66,7 +66,7 @@ This deletes both local databases. Do not use it on data you need to preserve.
 
 ## Railway setup (not yet cloud-verified)
 
-The standalone source is `tech-progress/sqlmesh-transformations`, with real `release-v1` compatibility channel and immutable `v1.0.0` tag, root `/`. Fork maintainers must set `TEMPLATE_SOURCE_REPO` to their own actual accessible repository and authorize Railway's GitHub App; public visibility alone is not proof of source authorization. `TEMPLATE_SOURCE_BRANCH` defaults to slash-free `release-v1`; `TEMPLATE_SOURCE_ROOT` defaults to `/`. Monorepo maintainers may explicitly select `/sqlmesh-transformations`. Build watch patterns follow the selected root. Independent native secret expressions generate distinct database passwords; never use deterministic SDK `randomString` for published credentials.
+The standalone source is `tech-progress/sqlmesh-transformations`, with real `release-v1` compatibility channel and immutable `v1.0.1` tag, root `/`. Historical `v1.0.0` lacks the required inventory and is not a qualified deployment release; it is not retagged. Fork maintainers must set `TEMPLATE_SOURCE_REPO` to their own actual accessible repository and authorize Railway's GitHub App; public visibility alone is not proof of source authorization. `TEMPLATE_SOURCE_BRANCH` defaults to slash-free `release-v1`; `TEMPLATE_SOURCE_ROOT` defaults to `/`. Monorepo maintainers may explicitly select `/sqlmesh-transformations`. Build watch patterns follow the selected root. Independent native secret expressions generate distinct database passwords; never use deterministic SDK `randomString` for published credentials.
 
 ```bash
 bun install --frozen-lockfile

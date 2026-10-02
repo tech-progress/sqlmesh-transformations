@@ -1,6 +1,6 @@
 [project]
 name = "railway-sqlmesh-transformations"
-version = "1.0.0"
+version = "1.0.1"
 requires-python = ">=3.12,<3.13"
 dependencies = ["sqlmesh[postgres]==0.236.2"]
 
