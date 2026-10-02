@@ -1,0 +1,12 @@
+{
+  "directory": "sqlmesh-transformations",
+  "name": "SQLMesh transformations",
+  "category": "Analytics",
+  "description": "Reviewed SQLMesh plans with private state and warehouse Postgres.",
+  "icon": "https://raw.githubusercontent.com/SQLMesh/sqlmesh/v0.236.2/web/client/public/favicons/favicon.svg",
+  "origins": [
+    {"name": "SQLMesh", "url": "https://github.com/SQLMesh/sqlmesh"},
+    {"name": "PostgreSQL", "url": "https://www.postgresql.org"}
+  ],
+  "publicationStatus": "local-unpublished"
+}

@@ -1,0 +1,4 @@
+{
+  "SQLMesh State": {"key": "<sqlmesh-state-data>", "mountPath": "/var/lib/postgresql/data", "sizeMB": 5000},
+  "SQLMesh Warehouse": {"key": "<sqlmesh-warehouse-data>", "mountPath": "/var/lib/postgresql/data", "sizeMB": 5000}
+}

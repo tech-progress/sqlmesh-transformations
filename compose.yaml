@@ -1,0 +1,54 @@
+name: rt-sqlmesh-cb5c13c4
+services:
+  state:
+    image: postgres:16-alpine@sha256:721873c34ceb9f8d8fc265984940dc982404c105f19ad51be9fdc5970a6080ea
+    environment:
+      POSTGRES_DB: sqlmesh_state
+      POSTGRES_USER: sqlmesh
+      POSTGRES_PASSWORD: ${STATE_PASSWORD:?Set STATE_PASSWORD}
+      PGDATA: /var/lib/postgresql/data/pgdata
+    volumes:
+      - state-data:/var/lib/postgresql/data
+    healthcheck:
+      test: [CMD-SHELL, 'pg_isready -U sqlmesh -d sqlmesh_state']
+      interval: 2s
+      timeout: 3s
+      retries: 30
+  warehouse:
+    image: postgres:16-alpine@sha256:721873c34ceb9f8d8fc265984940dc982404c105f19ad51be9fdc5970a6080ea
+    environment:
+      POSTGRES_DB: warehouse
+      POSTGRES_USER: sqlmesh
+      POSTGRES_PASSWORD: ${WAREHOUSE_PASSWORD:?Set WAREHOUSE_PASSWORD}
+      PGDATA: /var/lib/postgresql/data/pgdata
+    volumes:
+      - warehouse-data:/var/lib/postgresql/data
+    healthcheck:
+      test: [CMD-SHELL, 'pg_isready -U sqlmesh -d warehouse']
+      interval: 2s
+      timeout: 3s
+      retries: 30
+  runner:
+    build: .
+    image: rt-sqlmesh-cb5c13c4-runner:1.0.0
+    restart: "no"
+    environment:
+      PYTHONPATH: /app
+      STATE_HOST: state
+      STATE_PORT: "5432"
+      STATE_DATABASE: sqlmesh_state
+      STATE_USER: sqlmesh
+      STATE_PASSWORD: ${STATE_PASSWORD:?Set STATE_PASSWORD}
+      STATE_SSLMODE: prefer
+      WAREHOUSE_HOST: warehouse
+      WAREHOUSE_PORT: "5432"
+      WAREHOUSE_DATABASE: warehouse
+      WAREHOUSE_USER: sqlmesh
+      WAREHOUSE_PASSWORD: ${WAREHOUSE_PASSWORD:?Set WAREHOUSE_PASSWORD}
+      WAREHOUSE_SSLMODE: prefer
+    depends_on:
+      state: {condition: service_healthy}
+      warehouse: {condition: service_healthy}
+volumes:
+  state-data:
+  warehouse-data:

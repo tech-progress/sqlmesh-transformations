@@ -1,0 +1,44 @@
+test_staged_orders_window_and_normalization:
+  model: analytics.staged_orders
+  vars:
+    start: 2026-09-29
+    end: 2026-09-29
+  inputs:
+    raw.orders:
+      rows:
+        - {order_id: 1, ordered_at: '2026-09-29 09:00:00', amount: 12.50, status: PAID}
+        - {order_id: 2, ordered_at: '2026-09-30 10:00:00', amount: 20.00, status: paid}
+  outputs:
+    query:
+      rows:
+        - {order_id: 1, order_date: '2026-09-29', amount: 12.50, status: paid}
+
+test_daily_revenue_excludes_cancelled_and_other_days:
+  model: analytics.daily_revenue
+  vars:
+    start: 2026-09-29
+    end: 2026-09-29
+  inputs:
+    analytics.staged_orders:
+      rows:
+        - {order_id: 1, order_date: '2026-09-29', amount: 12.50, status: paid}
+        - {order_id: 2, order_date: '2026-09-29', amount: 7.50, status: paid}
+        - {order_id: 3, order_date: '2026-09-29', amount: 99.00, status: cancelled}
+        - {order_id: 4, order_date: '2026-09-30', amount: 30.00, status: paid}
+  outputs:
+    query:
+      rows:
+        - {order_date: '2026-09-29', paid_orders: 2, revenue: 20.00}
+
+test_daily_revenue_empty_paid_set:
+  model: analytics.daily_revenue
+  vars:
+    start: 2026-09-29
+    end: 2026-09-29
+  inputs:
+    analytics.staged_orders:
+      rows:
+        - {order_id: 3, order_date: '2026-09-29', amount: 99.00, status: cancelled}
+  outputs:
+    query:
+      rows: []

@@ -1,0 +1,29 @@
+{
+  "SQLMesh State": {
+    "POSTGRES_DB": "Independent SQLMesh metadata and intervals database.",
+    "POSTGRES_USER": "SQLMesh state database owner.",
+    "POSTGRES_PASSWORD": "Generated independent state database secret; preserve across redeploys.",
+    "PGDATA": "Postgres data subdirectory inside the State Data volume."
+  },
+  "SQLMesh Warehouse": {
+    "POSTGRES_DB": "Raw orders, physical model tables, and production views database.",
+    "POSTGRES_USER": "Warehouse owner; restrict privileges for real workloads.",
+    "POSTGRES_PASSWORD": "Generated independent warehouse secret; preserve across redeploys.",
+    "PGDATA": "Postgres data subdirectory inside the Warehouse Data volume."
+  },
+  "SQLMesh Runner": {
+    "PYTHONPATH": "Makes the baked project configuration available to operator scripts.",
+    "STATE_HOST": "Private DNS of the independent state PostgreSQL service.",
+    "STATE_PORT": "Private state PostgreSQL port.",
+    "STATE_DATABASE": "State database from the SQLMesh State service.",
+    "STATE_USER": "State database user from the SQLMesh State service.",
+    "STATE_PASSWORD": "Private reference to the generated state secret.",
+    "STATE_SSLMODE": "Prefer TLS; Railway private transport may use plaintext PostgreSQL.",
+    "WAREHOUSE_HOST": "Private DNS of the independent warehouse PostgreSQL service.",
+    "WAREHOUSE_PORT": "Private warehouse PostgreSQL port.",
+    "WAREHOUSE_DATABASE": "Warehouse database from the SQLMesh Warehouse service.",
+    "WAREHOUSE_USER": "Warehouse user from the SQLMesh Warehouse service.",
+    "WAREHOUSE_PASSWORD": "Private reference to the independent warehouse secret.",
+    "WAREHOUSE_SSLMODE": "Prefer TLS; use require when targeting a TLS-enabled external database."
+  }
+}

@@ -1,0 +1,6 @@
+- name: raw.orders
+  columns:
+    order_id: INT
+    ordered_at: TIMESTAMP
+    amount: DECIMAL(12, 2)
+    status: TEXT
