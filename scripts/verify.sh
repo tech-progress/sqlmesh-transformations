@@ -14,6 +14,7 @@ required_files=(
   scripts/verify.sh scripts/workflow-smoke.sh scripts/smoke.sh scripts/plan.py
   scripts/check-ready.py scripts/assert-results.py scripts/fixture.py scripts/probe-changed-source.py
   scripts/evaluate-iac.ts scripts/template-contract.py scripts/restore-template-draft.sh scripts/audit-template.sh
+  scripts/verify-docs.mjs tests/docs.test.mjs
 )
 for file in "${required_files[@]}"; do test -f "${file}" || { echo "Missing ${file}" >&2; exit 1; }; done
 version="$(<VERSION)"
@@ -38,9 +39,11 @@ TEMPLATE_SOURCE_REPO=fixture-owner/fixture-source TEMPLATE_SOURCE_BRANCH=release
 TEMPLATE_SOURCE_REPO=fixture-owner/alternate-source TEMPLATE_SOURCE_BRANCH=release-v2 TEMPLATE_SOURCE_ROOT=/ bun scripts/evaluate-iac.ts >"${alternate}"
 jq -e '.graph.resources[]|select(.name=="SQLMesh Runner")|.source.repo=="fixture-owner/alternate-source" and .source.branch=="release-v2" and .source.rootDirectory=="/" and .build.watchPatterns==["/**"]' "${alternate}" >/dev/null
 SQLMESH_TEST_GRAPH="${graph}" python3 -m unittest discover -s tests -p test_template_contract.py -v
+node scripts/verify-docs.mjs
+node --test tests/*.test.mjs
 grep -Fq 'exec sqlmesh run prod "$@"' start.sh
 if grep -Eq 'auto.apply|sqlmesh plan|scripts/plan.py' start.sh; then echo 'Cron may not plan/apply' >&2; exit 1; fi
 grep -Fq 'name = "sqlmesh"' uv.lock
 grep -Fq 'version = "0.236.2"' uv.lock
-if find . -path './node_modules' -prune -o -path './.venv' -prune -o -type f \( -name .env -o -name '*.local' \) -print | grep -q .; then echo 'Local secret file found' >&2; exit 1; fi
+if find . -path './node_modules' -prune -o -path './.venv' -prune -o -path './.local' -prune -o -type f \( -name .env -o -name '*.local' \) -print | grep -q .; then echo 'Local secret file found' >&2; exit 1; fi
 echo 'PASS: scoped structure, pins, locks, metadata, private compose, configurable offline IaC, distinct mount edges, contaminated draft repair/audit.'

@@ -8,7 +8,7 @@ const branch = process.env.TEMPLATE_SOURCE_BRANCH ?? "release-v1";
 if (branch.includes("/")) throw new Error("Use a slash-free Railway release branch.");
 const rootDirectory = process.env.TEMPLATE_SOURCE_ROOT ?? "/";
 const watchRoot = rootDirectory.replace(/^\/+|\/+$/g, "");
-const postgresImage = "postgres:16-alpine@sha256:721873c34ceb9f8d8fc265984940dc982404c105f19ad51be9fdc5970a6080ea";
+const postgresImage = "postgres:16.15-alpine@sha256:721873c34ceb9f8d8fc265984940dc982404c105f19ad51be9fdc5970a6080ea";
 
 export default defineRailway(() => {
   const stateData = volume("State Data", { sizeMB: 5_000 });

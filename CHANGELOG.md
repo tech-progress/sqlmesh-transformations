@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.4] - 2026-10-04
+
+- Separate source releases and historical private-workflow evidence from current marketplace qualification; retain the unobserved historical hourly scheduler limit.
+- Document fresh-default refusal, explicit bounded private bootstrap, native job outcomes and restoration of hourly cron settings.
+- State the accepted standard-deletion, zero-compute and disclosed-retention cleanup boundary without erasure or billing-zero claims.
+- Add static documentation regressions for release declarations, public links, private defaults and marketplace metadata.
+
 ## [1.0.3] - 2026-10-02
 
 - Complete the private operator-session instructions and consistent release-version documentation.

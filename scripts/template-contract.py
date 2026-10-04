@@ -53,7 +53,7 @@ def audit_graph(document):
             if volumes[volume_name]["config"] != {"sizeMB": 5000}:
                 raise ValueError(f"{name}: incorrect volume size")
             expected_edges.append({"from": resource["address"], "to": volumes[volume_name]["address"], "type": "mount", "key": "/var/lib/postgresql/data"})
-            if resource["source"] != {"type": "image", "image": "postgres:16-alpine@sha256:721873c34ceb9f8d8fc265984940dc982404c105f19ad51be9fdc5970a6080ea"}:
+            if resource["source"] != {"type": "image", "image": "postgres:16.15-alpine@sha256:721873c34ceb9f8d8fc265984940dc982404c105f19ad51be9fdc5970a6080ea"}:
                 raise ValueError(f"{name}: database image/source mismatch")
         elif resource.get("volumeAttachments"):
             raise ValueError("Runner must not have a volume")

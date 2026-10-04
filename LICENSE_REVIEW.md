@@ -1,0 +1,29 @@
+# License review
+
+## October 4 source-recipe disposition
+
+Finite review accepts this source/build-instruction recipe: no concrete missing production grant/required source notice or demonstrated default-request-reachable unpatched trigger was identified. All 59 application Python distribution versions match the locked dependency set; 96 original notice-path entries were reconciled with captured upstream texts or exact locked wheels. A new local runtime readback independently matches the application package versions and original notice hashes. These checks do not establish complete frontend, compiled Rust, NumPy/GCC/libquadmath or other native artifact closure. Any separately conveyed assembled image still needs its own notice, corresponding-source and applicable relinking/exception review; no prebuilt combined image is distributed here.
+
+Primary [PostgreSQL versioning](https://www.postgresql.org/support/versioning/) and [16.15 release notes](https://www.postgresql.org/docs/release/16.15/) confirm server 16.15 and client major-15 patch 15.19 are current supported minor versions at this review. The explicit 16.15 image tag retains the independently verified existing OCI digest; do not transfer another template's major-17 patch decision. The historical Debian/advisory inventory below is not a new-image scan or universal clearance. Finite primary trigger review found no configured Perl/archive/mount/ACL/DTLS operation; TCP database traffic is not DTLS. OpenSSL remains subject to inherited advisory status. The default unmodified database has no configured server TLS certificate; `sslmode=prefer` does not enforce encryption or identity verification. Enabling TLS/untrusted endpoints introduces additional handshake/certificate exposure requiring renewed review, rather than a claim that all OpenSSL paths are safe.
+
+Only trusted operator-owned SQL/configuration, reviewed state and synthetic fixture data are supported. No public SQL/API, runtime package installation or untrusted plugin/archive workflow is provisioned. Private networking and the non-root runner are exposure boundaries, not patching, hostile-tenant isolation or least-privilege database roles. Current-source cloud, actual hourly job, paired recovery, cleanup and marketplace evidence must pass independently of this finite permission/exposure disposition.
+
+Final scoped source-build review on October 2, 2026: actual minimal runtime inventory records 59 Python distributions and 109 Debian packages, all with retained upstream notice files; `runtime-license-inventory.json` includes exact source versions/notice-path hashes. Actual license texts resolve metadata gaps for asttokens, charset-normalizer, json-stream-rs-tokenizer (including supplied Rust dependency/stdlib notices), psutil, python-dotenv and tzdata. Source-built Psycopg2 retains LGPL-3.0-or-later plus original exceptions and dynamically loads Debian libpq15.19. uv and compiler/header artifacts are now build-stage-only. Source distribution does not relabel combined binaries or waive native/GPL/LGPL/MPL duties; see `THIRD_PARTY_NOTICES.md`. Exact-image scan reports zero high/critical Python-package matches and 8 Critical/63 High raw Debian matches, not exploit findings or complete security clearance; native exposure/status review remains required for live promotion.
+
+Reviewed October 2, 2026 against primary upstream sources and the installed dependency lock. This is a technical distribution review, not legal advice.
+
+| Component | Pin / license | Primary source |
+| --- | --- | --- |
+| SQLMesh | 0.236.2, Apache-2.0 | [Pinned license](https://github.com/SQLMesh/sqlmesh/blob/v0.236.2/LICENSE), [PyPI release](https://pypi.org/project/sqlmesh/0.236.2/) |
+| PostgreSQL | 16.15 image digest, PostgreSQL License | [License](https://www.postgresql.org/about/licence/), [official container source](https://github.com/docker-library/postgres) |
+| Python | 3.12.15, PSF license | [License](https://docs.python.org/3.12/license.html), [official container source](https://github.com/docker-library/python) |
+| uv | 0.12.22, MIT or Apache-2.0 | [Pinned source](https://github.com/astral-sh/uv/tree/0.12.22) |
+| psycopg2 | Locked 2.9.13, LGPL with exceptions | [License and exceptions](https://www.psycopg.org/docs/license.html), [package metadata](https://pypi.org/project/psycopg2/2.9.13/) |
+| Railway IaC authoring dependency | 3.12.0, MIT | Package `node_modules/railway/LICENSE`; not included in the runtime image |
+
+SQLMesh permits this use/distribution; retain upstream license/notices for redistributed components and document any source modifications. This template uses SQLMesh as an unmodified locked dependency, not copied upstream source. The runtime retains package metadata/licenses and libpq from the official Debian/Python image. The source-build driver avoids a second conflicting psycopg2-binary install. Review the full transitive `uv.lock` and base-image package inventory before public binary redistribution; no blanket security/compliance certification is claimed.
+
+The marketplace icon links the **SQLMesh product** SVG at [web/client/public/favicons/favicon.svg](https://github.com/SQLMesh/sqlmesh/blob/v0.236.2/web/client/public/favicons/favicon.svg), not the parent Tobiko vendor logo. Source license does not grant endorsement/trademark rights. No vendor affiliation or production support is implied. Fixture rows are synthetic and contain no personal data.
+## Owner-approved recipe license — October 2, 2026
+
+The owner expressly authorized MIT for newly authored template/wrapper/application code on October 2, 2026. `LICENSE` records that grant only for recipe-owned code. Upstream licenses, attribution, source-availability obligations, and trademarks are retained independently; this approval does not clear unknown upstream artifacts or change dependency licenses.

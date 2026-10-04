@@ -1,7 +1,7 @@
 name: rt-sqlmesh-cb5c13c4
 services:
   state:
-    image: postgres:16-alpine@sha256:721873c34ceb9f8d8fc265984940dc982404c105f19ad51be9fdc5970a6080ea
+    image: postgres:16.15-alpine@sha256:721873c34ceb9f8d8fc265984940dc982404c105f19ad51be9fdc5970a6080ea
     environment:
       POSTGRES_DB: sqlmesh_state
       POSTGRES_USER: sqlmesh
@@ -15,7 +15,7 @@ services:
       timeout: 3s
       retries: 30
   warehouse:
-    image: postgres:16-alpine@sha256:721873c34ceb9f8d8fc265984940dc982404c105f19ad51be9fdc5970a6080ea
+    image: postgres:16.15-alpine@sha256:721873c34ceb9f8d8fc265984940dc982404c105f19ad51be9fdc5970a6080ea
     environment:
       POSTGRES_DB: warehouse
       POSTGRES_USER: sqlmesh
@@ -30,7 +30,7 @@ services:
       retries: 30
   runner:
     build: .
-    image: rt-sqlmesh-cb5c13c4-runner:1.0.3
+    image: rt-sqlmesh-cb5c13c4-runner:1.0.4
     restart: "no"
     environment:
       PYTHONPATH: /app
